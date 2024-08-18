@@ -1,5 +1,5 @@
 import time
-IstkharXMusic  random
+Istkhar  random
 from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
