@@ -1,15 +1,15 @@
 import time
-import random
+
 from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from youtubesearchpython.__future__ import VideosSearch
 
 import config
-from IstkharXMusic XMusic   import app
-from IstkharXMusic XMusic  .misc import _boot_
-from IstkharXMusic XMusic  .plugins.sudo.sudoers import sudoers_list
-from IstkharXMusic XMusic  .utils.database import (
+from IstkharXMusic import app
+from IstkharXMusic.misc import _boot_
+from IstkharXMusic.plugins.sudo.sudoers import sudoers_list
+from IstkharXMusic.utils.database import (
     add_served_chat,
     add_served_user,
     blacklisted_chats,
@@ -17,30 +17,11 @@ from IstkharXMusic XMusic  .utils.database import (
     is_banned_user,
     is_on_off,
 )
-from IstkharXMusic XMusic  .utils.decorators.language import LanguageStart
-from IstkharXMusic XMusic  .utils.formatters import get_readable_time
-from IstkharXMusic XMusic  .utils.inline import help_pannel, private_panel, start_panel
+from IstkharXMusic.utils.decorators.language import LanguageStart
+from IstkharXMusic.utils.formatters import get_readable_time
+from IstkharXMusic.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
-
-
-
-Hina_PICS = [
-"https://telegra.ph/file/2e85d11aefdf6cd01301b.jpg",
-"https://telegra.ph/file/0a08b180583f13952336a.jpg",
-"https://telegra.ph/file/ace92d59d19127d2d4e89.jpg",
-"https://telegra.ph/file/bb0a28259990c6a978985.jpg",
-"https://telegra.ph/file/ace92d59d19127d2d4e89.jpg",
-"https://telegra.ph/file/a0db46dfacd94e489117b.jpg",
-"https://telegra.ph/file/cd77be2595cdc2fca60a3.jpg",
-"https://telegra.ph/file/632724b3d30c691247c77.jpg",
-"https://telegra.ph/file/a2d01afe4f2cb1d4b650c.jpg",
-"https://telegra.ph/file/94dc035df11dfb159b999.jpg",
-"https://telegra.ph/file/fed9a5b1cbaaefc3a818c.jpg",
-"https://telegra.ph/file/66fd03632cbb38bdb4193.jpg"
-
-]
-
 
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
@@ -52,7 +33,7 @@ async def start_pm(client, message: Message, _):
         if name[0:4] == "help":
             keyboard = help_pannel(_)
             return await message.reply_photo(
-                random.choice(Hina_PICS),
+                photo=config.START_IMG_URL,
                 caption=_["help_1"].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
             )
@@ -104,7 +85,7 @@ async def start_pm(client, message: Message, _):
     else:
         out = private_panel(_)
         await message.reply_photo(
-            random.choice(Hina_PICS),
+            photo=config.START_IMG_URL,
             caption=_["start_2"].format(message.from_user.mention, app.mention),
             reply_markup=InlineKeyboardMarkup(out),
         )
@@ -121,7 +102,7 @@ async def start_gp(client, message: Message, _):
     out = start_panel(_)
     uptime = int(time.time() - _boot_)
     await message.reply_photo(
-        random.choice(Hina_PICS),
+        photo=config.START_IMG_URL,
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
     )
@@ -156,7 +137,7 @@ async def welcome(client, message: Message):
 
                 out = start_panel(_)
                 await message.reply_photo(
-                    random.choice(Hina_PICS),
+                    photo=config.START_IMG_URL,
                     caption=_["start_3"].format(
                         message.from_user.first_name,
                         app.mention,
@@ -169,4 +150,3 @@ async def welcome(client, message: Message):
                 await message.stop_propagation()
         except Exception as ex:
             print(ex)
-          
